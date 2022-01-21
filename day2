@@ -1,0 +1,47 @@
+'''
+Accept three sides of triangle and check whether the triangle is possible or not.
+(triangle is possible only when sum of any two sides is greater than 3rd side)
+'''
+t1=int(input("Enter the side 1:"))
+t2=int(input("Enter side 2:"))
+t3=int(input('enter side 3:'))
+
+if (t1+t2)>t3 and (t2+t3)>t1 and (t1+t3)>t2:
+    print("Triangle is possible")
+else:
+    print('not possible')
+
+'''
+Write a program to display "Hello" if a number entered by user is a multiple of five , 
+otherwise print "Bye"
+
+'''
+n=int(input())
+if n%5==0:
+    print('hello')
+else:
+    print("bye")
+
+'''
+Write a program to calculate the electricity bill (accept number of unit from user) according to the following criteria :
+             Unit                                                     Price  
+First 100 units                                               no charge amt = 0
+Next 100 units   {unit>100 unit<=200}                         Rs 5 per unit
+After 200 units                                             Rs 10 per unit
+
+95 ---->0
+100 --->0
+101 ---> 5
+150 ---> (150-100)5      {100 - 200}
+201 ---> 10(201-200)     {200>}
+(For example if input unit is 350 than total bill amount is 1500)
+'''
+
+n=int(input())
+
+if n<=100:
+    print("charge amount is 0")
+elif n>100 and n<=200:
+    print("charge amount is ",(n-100)*5)
+elif n>200:
+    print("charge amount is ",(n-200)*10)
