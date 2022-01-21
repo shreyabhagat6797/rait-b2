@@ -1,0 +1,131 @@
+#funtions
+'''
+A function in Python is an aggregation of related statements designed to perform a computational, logical, or evaluative task.
+'''
+
+#syntax
+'''
+def function_name(parameters):
+    """docstring"""   #document string
+    statements
+    return exp
+
+book=function_name()
+print(book)
+
+print(function_name())
+'''
+
+'''def func():
+    print("welcome to python")
+
+func()
+'''
+
+'''def even_odd(x):
+    if x%2==0:
+        print("even")
+    else:
+        print("odd")
+
+even_odd(4)
+even_odd(5)'''
+
+
+'''def square(num):
+    """Square of number"""
+    return num**2    #num*num
+
+print(square.__doc__)
+print(square(2))
+print(square(-5))'''
+
+#pass by reference or pass by value
+'''
+when we pass a reference & change the received reference to something else, 
+then the connection between the passed & received parameter is broken. 
+'''
+
+'''def func(x):
+    x[0]=20
+
+x=[30]
+func(x)
+print(x)'''
+
+'''
+Next Number Greater Than A and B and Divisible by B
+
+You are given two numbers a and b. 
+Create a function that returns the next number greater than a and b and divisible by b.
+a will always be greater than b.
+
+Examples
+divisible_by_b(17, 8) ➞ 24
+
+divisible_by_b(98, 3) ➞ 99
+
+'''
+
+'''def divisible(a,b):
+    x=max(a,b)+1
+    while x%b:
+        x+=1
+    return x 
+
+print(divisible(17,8))
+print(divisible(98,3))'''
+
+
+'''def divisible(a,b):
+    return (a//b+1)*b
+
+print(divisible(17,8))
+print(divisible(20,4))'''
+
+
+'''
+Weekly Salary
+Write a function that takes a list of hours and returns the total weekly salary.
+•	The input list hours is listed sequentially, ordered from Monday to Sunday.
+•	A worker earns $10 an hour for the first 8 hours.
+•	For every overtime hour, he earns $15.
+•	On weekends, the employer pays double the usual rate, 
+regardless how many hours were worked previously that week. 
+For instance, 10 hours worked on a weekday would pay 80+30 = $110, but on a weekend it would pay 160+60 = $220.
+
+Examples
+weekly_salary([8, 8, 8, 8, 8, 0, 0]) ➞ 400
+
+weekly_salary([10, 10, 10, 0, 8, 0, 0]) ➞ 410
+
+'''
+
+def weekly(l):
+    salary=0
+    for i in l[:5]:
+        if 0<i<=8:
+            salary=salary+i*10
+        elif i>8:
+            salary=salary+80+(i-8)*15
+    for i in l[5:]:
+        if 0<i<=8:
+            salary=salary+i*20
+        elif i>8:
+            salary=salary+160+(i-8)*30
+    return salary
+
+print(weekly([10, 10, 10, 0, 8, 0, 0]))
+
+
+'''
+Given a list and chunk size "n", 
+create a function such that it divides the list into many sublists where each sublist is of length size "n".
+Examples
+chunk([1, 2, 3, 4], 2) ➞ [[1, 2], [3, 4]]
+
+chunk([1, 2, 3, 4, 5, 6, 7], 3) ➞ [[1, 2, 3], [4, 5, 6], [7]]
+
+chunk([1, 2, 3, 4 ,5], 10) ➞ [[1, 2, 3, 4, 5]]
+
+'''
