@@ -1,0 +1,178 @@
+'''
+Create a function that takes an integer list and return the biggest between positive sum, negative sum, or 0s count. 
+The major is understood as the greatest absolute.
+l = [1,2,3,4,0,0,-3,-2], the function has to return 10, because:
+•	Positive sum = 1+2+3+4 = 10
+•	Negative sum = (-3)+(-2) = -5
+•	0s count = 2 (there are two zeros in list)
+
+Examples
+major_sum([1, 2, 3, 4, 0, 0, -3, -2]) ➞ 10
+
+major_sum([-4, -8, -12, -3, 4, 7, 1, 3, 0, 0, 0, 0]) ➞ -27
+
+major_sum([0, 0, 0, 0, 0, 1, 2, -3]) ➞ 5
+# Because -3 < 1+2 < 0sCount = 5
+
+'''                  
+
+def maxx(lst):
+    p,n,z=0,0,0
+    for i in lst:
+        if i>0:
+            p+=i
+        elif i<0:
+            n+=i
+        else:
+            z+=1
+    return max(p,n,z,key=abs)
+
+
+print(maxx([-4, -8, -12, -3, 4, 7, 1, 3, 0, 0, 0, 0]))
+
+#non-keyword arguments 
+'''
+*args
+
+
+
+def func(*argv):
+    for args in argv:
+        print(args)
+
+func("hello","to","python")
+'''
+#keyword arguments
+
+'''
+**kwargs
+'''
+'''
+def func(**kwargs):
+    for key,value in kwargs.items():
+        print("%s==%s"%(key,value))
+
+func(first="hello",mid="to",last="python")
+
+
+def func(arg1,**kwargs):
+    for key,value in kwargs.items():
+        print("%s==%s"%(key,value))
+    print(arg1)
+
+func('hi',first="hello",mid="to",last="python")
+
+
+def func(arg1,arg2,arg3):
+    print("arg1:",arg1)
+    print("arg2:",arg2)
+    print("arg3:",arg3)
+
+args=("hello","python","world")
+func(*args)
+
+kwargs={"arg1":"hello","arg2":"to",'arg3':"python"}
+func(**kwargs)
+
+def func(*args,**kwargs):
+    print("args:",args)
+    print("kwargs:",kwargs)
+
+func("hello","python","world",first="hello",mid="to",last="python")
+
+
+#anonymous function & lambda function 
+
+
+def cube(x):
+    return x*x*x 
+
+cube_v2=lambda x:x*x*x
+
+print(cube(7))
+
+print(cube_v2(7))
+
+#string='python'
+
+#print(lambda string:string)
+
+string='python'
+(lambda string:print(string))(string)
+
+def power(n):
+    return lambda x:x**n
+
+base=power(2)
+print(base(8))'''
+
+
+'''
+Write a python function to check whether three given numbers can form the sides of a triangle. 
+Hint: Three numbers can be the sides of a triangle if none of the numbers are greater than or equal to the sum of the other two numbers.
+'''
+
+
+'''def triangle(num1,num2,num3):
+    l=[num1,num2,num3]
+    flag=True
+    for n in l:
+        if n>=l[(l.index(n)+1)%3]+l[(l.index(n)+2)%3]:
+            flag=False
+            break
+    return flag
+
+print(triangle(3,3,5))'''
+
+'''
+Write a python program to solve a classic ancient Chinese puzzle.
+We count 35 heads and 94 legs among the chickens and rabbits in a farm. 
+How many rabbits and how many chickens do we have?
+
+Sample Input	         Expected Output
+heads-150 legs-400	       100    50
+heads-3 legs-11	        No solution
+heads-3 legs-12	             0    3
+heads-5 legs-10	             5    0
+
+'''
+
+'''def count(heads,legs):
+    chicken=0
+    rabbit=0
+    if legs%2==0:
+        rabbit=(legs//2)-heads
+        chicken=heads-rabbit
+        if rabbit<0 or chicken<0:
+            print("no solution") 
+        else:
+            print(chicken)
+            print(rabbit)
+    else:
+        print("no solution")
+
+count(150,400)
+count(3,11)
+count(3,12)
+count(5,10)'''
+
+'''
+Write a Python program to generate the next 15 leap years starting from a given year. 
+Populate the leap years into a list and display the list. 
+'''
+
+'''def find_leap(given_year):
+    list_of_leap=[]
+    while len(list_of_leap)!=15:
+        if given_year%4==0:
+            if given_year%100==0:
+                if given_year%400==0:
+                    list_of_leap.append(given_year)
+            else:
+
+                list_of_leap.append(given_year)
+        given_year+=1
+    return list_of_leap
+
+l=find_leap(2000)
+print(l)'''
