@@ -126,3 +126,16 @@ def letters(n1,n2):
     return val
 
 print(letters("house", "home"))
+
+
+'''
+Chess Board Squares
+Create a function that takes a code of chess board square and return its color.
+ 
+Examples
+chess_board("a1") ➞ "black"
+
+chess_board("e5") ➞ "black"
+
+chess_board("d1") ➞ "white"
+'''
