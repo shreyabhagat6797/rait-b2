@@ -1,0 +1,128 @@
+'''
+Write a python program which finds the maximum number from num1 to num2 (num2 inclusive) based on the following rules.
+ 
+1. Always num1 should be less than num2
+
+2. Consider each number from num1 to num2 (num2 inclusive). Populate the number into a list, if the below conditions are satisfied
+
+      a. Sum of the digits of the number is a multiple of 3
+
+      b. Number has only two digits
+
+      c. Number is a multiple of 5
+
+3. Display the maximum element from the list
+
+In case of any invalid data or if the list is empty, display -1.
+'''
+
+def find_max(num1,num2):
+    max_num=-1
+    l=[max_num]
+    if num1<num2:
+        for num in range(num1,num2+1):
+            if len(str(num))==2:
+                sum=0
+                for digit in str(num):
+                    sum=sum+int(digit)
+                if sum%3==0:
+                    if num%5==0:
+                        l.append(num)
+    return max(l)
+
+maxx=find_max(10,15)
+print(maxx)
+
+
+'''
+ARS Gems Store sells different varieties of gems to its customers.
+
+Write a Python program to calculate the bill amount to be paid by a customer based on the list of gems and quantity purchased. 
+Any purchase with a total bill amount above Rs.30000 is entitled for 5% discount. 
+If any gem required by the customer is not available in the store, then consider total bill amount to be -1.
+
+Assume that quantity required by the customer for any gem will always be greater than 0.
+
+Perform case-sensitive comparison wherever applicable.
+'''
+
+def bill(gems_list,price_list,req_gems,req_quantity):
+    bill_amount=0
+    for gem in req_gems:
+        if gem in gems_list:
+            i1=gems_list.index(gem)
+            i2=req_gems.index(gem)
+            bill_amount=bill_amount+(price_list[i1]*req_quantity[i2])
+            if bill_amount>=30000:
+                bill_amount*=0.95
+        #else:
+            #return -1
+    return bill_amount
+
+gems_list=["Emerald","Ivory","Jasper","Ruby","Garnet"]
+price_list=[1760,2119,1599,3920,3999]
+req_gems=["Ivory","Ruby","Emerald","Opal"]
+req_quantity=[2,1,3]
+
+billl=bill(gems_list,price_list,req_gems,req_quantity)
+print(billl)
+
+
+'''
+Given a string containing uppercase characters (A-Z), compress the string using Run Length encoding. 
+Repetition of character has to be replaced by storing the length of that run.
+
+Write a python function which performs the run length encoding for a given String and returns the run length encoded String.
+
+Provide different String values and test your program
+
+Sample Input          Expected Output
+
+AAAABBBBCCCCCCCC        4A4B8C
+
+AABCCA                  2A1B2C1A
+'''
+
+
+
+def encode(message):
+    encode=message+"0"
+    l=[]
+    count=1
+    for index,value in enumerate(encode):
+        if value!="0":
+            if value==encode[index+1]:
+                count=count+1
+            else:
+                l.append(str(count))
+                l.append(value)
+                count=1
+    return "".join(l)
+
+encoded=encode("AAABCCCCCDDD")
+print(encoded)
+
+"""
+Find the Shared Letters between Two Strings
+Given two strings, return a string containing only the letters shared between the two.
+Examples
+shared_letters("house", "home") ➞ "eho"
+
+shared_letters("Micky", "mouse") ➞ "m"
+
+shared_letters("house", "villa") ➞ ""
+•	If none of the letters are shared, return an empty string.
+•	The function should be case insensitive (e.g. comparing A and a should return a).
+•	Sort the resulting string alphabetically before returning it.
+
+"""
+
+def letters(n1,n2):
+    val=''
+    for i in n1.lower():
+        if i in n2.lower():
+            val=val+i
+    val="".join(sorted(set(val)))
+    return val
+
+print(letters("house", "home"))
