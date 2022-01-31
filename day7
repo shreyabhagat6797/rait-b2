@@ -1,0 +1,191 @@
+#recursion
+#a process in which a function calls itself
+
+'''def func():
+    ...
+    ...
+    func()'''
+
+
+#factorial
+def fact(n):
+    if n==1:
+        return n
+    else:
+        return n*fact(n-1)
+
+n=6
+if n<0:
+    print("invalid")
+elif n==0:
+    print("factotial of zero is 1")
+else:
+    print("factorial of ",n,"=",fact(n))
+
+#fibonacci series
+
+def fibo(n):
+    if n<=1:
+        return n
+    else:
+        return (fibo(n-1)+fibo(n-2))
+
+n=10
+if n<=0:
+    print("invalid")
+else:
+    for i in range(n):
+        print(fibo(i))
+
+
+#map()
+
+def add(n):
+    return n+n
+
+numbers=(1,2,3,4)
+result=map(add,numbers)
+print(list(result))
+
+#filter()
+
+def func(variable):
+    letters=['a','e','i','o','u']
+    if (variable in letters):
+        return True
+    else:
+        return False
+
+seq=['g','e','e','j','k']
+filtered=filter(func,seq)
+for i in filtered:
+    print(i)'''
+
+'''a=[2,3,100,60,4,5,6,42]
+
+filtered=filter(lambda x:x%2==0,a)
+print(list(filtered))
+
+mapped=map(lambda x:x%2==0,a)
+print(list(mapped))
+
+
+'''
+A teacher is conducting a camp for a group of five children. Based on their performance and behavior during the camp, 
+the teacher rewards them with chocolates.
+
+Write a Python function to
+
+1. Find the total number of chocolates received by all the children put together.
+Assume that each child is identified by an id and it is stored in a tuple and the number of chocolates given to each child is stored in a list.
+
+2. The teacher also rewards a child with few extra chocolates for his/her best conduct during the camp.
+
+If the number of extra chocolates is less than 1, an error message "Extra chocolates is less than 1", should be displayed.
+
+If the given child Id is invalid, an error message "Child id is invalid" should be displayed. 
+Otherwise, the extra chocolates provided for the child must be added to his/her existing number of chocolates and 
+display the list containing the total number of chocolates received by each child.
+'''
+
+child_id=(10,20,30,40,50)
+chocolates=[12,5,3,4,6]
+
+def reward_child(child_rewarded,extra_chocolates):
+    s=sum(chocolates)
+    print(s)
+    if extra_chocolates<1:
+        print("Extra chocolates is less than 1")
+    elif child_rewarded not in child_id:
+        print("Child id is invalid")
+    else:
+        i=child_id.index(child_rewarded)
+        chocolates[i]=chocolates[i]+extra_chocolates
+        print(chocolates)
+
+reward_child(20,2)
+
+
+'''
+Write a python function, encrypt_sentence() which accepts a message and encrypts it based on rules given below and 
+returns the encrypted message.
+Words at odd position -> Reverse It
+Words at even position -> Rearrange the characters so that all consonants appear before the vowels and their order should not change
+
+Note: 
+
+Assume that the sentence would begin with a word and there will be only a single space between the words.
+
+Perform case sensitive string operations wherever necessary.
+
+Sample Input                         Expected Output
+
+the sun rises in the east           eht snu sesir ni eht stea
+
+ 
+'''
+
+vowels=['a','e','i','o','u']
+
+def encrypt_sentc(sentence):
+    l=[]
+    list_sentc=sentence.split(" ")
+    for index,word in enumerate(list_sentc):
+        if (index+1)%2!=0:
+            l.append(word[::-1])
+        else:
+            v=[]
+            t=[]
+            for letter in word:
+                if letter not in vowels:
+                    t.append(letter)
+                else:
+                    v.append(letter)
+            t.extend(v)
+            l.append("".join(t))
+    return " ".join(l)
+
+sentence="the sun rises in the east"
+encrypted=encrypt_sentc(sentence)
+print(encrypted)
+
+'''
+Chess Board Squares
+Create a function that takes a code of chess board square and return its color.
+ 
+Examples
+chess_board("a1") ➞ "black"
+
+chess_board("e5") ➞ "black"
+
+chess_board("d1") ➞ "white"
+
+'''
+
+def chess_board(pole):
+    blackfirst = [1,0,1,0,1,0,1,0]
+    whitefirst = [0,1,0,1,0,1,0,1]
+
+    Chess_map = {'a':blackfirst, 'b':whitefirst,
+                 'c':blackfirst, 'd':whitefirst,
+                 'e':blackfirst, 'f':whitefirst,
+                 'g':blackfirst, 'h':whitefirst,
+                }
+    code = Chess_map[pole[0]][int(pole[1])-1]
+    if code == 1:
+        solution = 'black'
+    else:
+        solution = 'white'
+    
+    return solution
+
+code = "e5"
+print(chess_board(code))
+
+#2
+
+def chess_board(p):
+    l, n = list(p)
+    return 'black' if ord(l) % 2 == int(n) % 2 else 'white'
+
+print(chess_board("g7"))
