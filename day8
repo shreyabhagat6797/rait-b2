@@ -1,0 +1,109 @@
+'''
+Write a python function, find_correct() which accepts a dictionary and returns a list as per the rules mentioned below.
+The input dictionary will contain correct spelling of a word as key and the spelling provided by a contestant as the value.
+
+The function should identify the degree of correctness as mentioned below:
+CORRECT, if it is an exact match
+ALMOST CORRECT, if no more than 2 letters are wrong
+WRONG, if more than 2 letters are wrong or if length (correct spelling versus spelling given by contestant) mismatches.
+
+and return a list containing the number of CORRECT answers, number of ALMOST CORRECT answers and number of WRONG answers. 
+Assume that the words contain only uppercase letters and the maximum word length is 10.
+
+Sample Input                                             Expected Output
+
+{"THEIR": "THEIR", "BUSINESS": "BISINESS",
+"WINDOWS":"WINDMILL","WERE":"WEAR","SAMPLE":"SAMPLE"}         [2, 2, 1]
+
+
+'''
+
+word_diction={"THEIR": "THEIR", "BUSINESS": "BISINESS","WINDOWS":"WINDMILL","WERE":"WEAR","SAMPLE":"SAMPLE"}
+
+def find_correct(word_diction):
+    correct,almost,wrong=0,0,0
+    for key,value in word_diction.items():
+        if key==value:
+            correct+=1
+        else:
+            if len(key)!=len(value):
+                wrong+=1
+                continue
+            incorrect=0
+            for i in range(min([len(key),len(value)])):
+                if key[i]!=value[i]:
+                    incorrect+=1
+                    if incorrect>2:
+                        wrong+=1
+                        break
+            if incorrect<=2:
+                almost+=1
+    return [correct,almost,wrong] 
+
+print(find_correct(word_diction))
+
+
+'''
+Care hospital wants to know the medical speciality visited by the maximum number of patients. 
+Assume that the patient id of the patient along with the medical speciality visited by the patient is stored in a list. 
+The details of the medical specialities are stored in a dictionary as follows:
+{
+"P":"Pediatrics",
+"O":"Orthopedics",
+"E":"ENT"
+} 
+
+Write a function to find the medical speciality visited by the maximum number of patients and return the name of the speciality.
+Note: 
+Assume that there is always only one medical speciality which is visited by maximum number of patients.
+Perform case sensitive string comparison wherever necessary.
+
+Sample Input                                    Expected Output
+
+[101,P,102,O,302,P,305,P]                       Pediatrics
+
+[101,O,102,O,302,P,305,E,401,O,656,O]           Orthopedics
+
+[101,O,102,E,302,P,305,P,401,E,656,O,987,E]        ENT
+'''        
+
+
+medical_speciality={"P":"Pediatrics","O":"Orthopedics","E":"ENT"} 
+
+patient=[101,'O',102,'E',302,'P',305,'P',401,'E',656,'O',987,'E']
+
+def max_visited(patient,medical_speciality):
+    l=[]
+    for key,value in medical_speciality.items():
+        l.append(patient.count(key))
+    speciality=tuple(medical_speciality.values())[l.index(max(l))]
+    return speciality
+
+speciality=max_visited(patient,medical_speciality)
+print(speciality)
+
+
+'''
+Write python function, sms_encoding() which accepts a sentence and converts it 
+into an abbreviated sentence to be sent as SMS and returns the abbreviated sentence. 
+
+Rules are as follows: 
+a. Spaces are to be retained as is 
+b. Each word should be encoded separately
+
+If a word has only vowels then retain the word as is
+
+If a word has a consonant (at least 1) then retain only those consonants
+
+Note: Assume that the sentence would begin with a word and there will be only a single space between the words.
+
+Sample Input                                Expected Output
+
+I love Python                                   I lv Pythn
+
+MSD says I love cricket and tennis too          MSD sys I lv crckt nd tnns t
+
+I will not repeat mistakes                      I wll nt rpt mstks
+
+
+'''
