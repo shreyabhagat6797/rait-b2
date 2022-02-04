@@ -1,0 +1,110 @@
+'''
+Write python function, sms_encoding() which accepts a sentence and converts it 
+into an abbreviated sentence to be sent as SMS and returns the abbreviated sentence. 
+
+Rules are as follows: 
+a. Spaces are to be retained as is 
+b. Each word should be encoded separately
+
+If a word has only vowels then retain the word as is
+
+If a word has a consonant (at least 1) then retain only those consonants
+
+Note: Assume that the sentence would begin with a word and there will be only a single space between the words.
+
+Sample Input                                Expected Output
+
+I love Python                                   I lv Pythn
+
+MSD says I love cricket and tennis too          MSD sys I lv crckt nd tnns t
+
+I will not repeat mistakes                      I wll nt rpt mstks
+
+'''
+'''
+vowels=['a','e','i','o','u']
+def sms_encoding(data):
+    temp=[]
+    l=data.split(" ")
+    for word in l:
+        temp_word=[]
+        for letter in word:
+            if letter.lower() not in vowels:
+                temp_word.append(letter)
+        if len(temp_word)==0:
+            temp_word.append(word)
+        temp.append("".join(temp_word))
+    return " ".join(temp)
+
+data="I love Python "
+print(sms_encoding(data))'''
+
+'''
+Write a recursive function, is_palindrome() to find out whether a string is a palindrome or not. 
+The function should return true, if it is a palindrome. Else it should return false. 
+
+Note- Perform case insensitive operations wherever necessary.
+'''
+
+'''def palindrome(word):
+    if word.lower()==word[::-1].lower():
+        return True
+    else:
+        return False
+
+word=palindrome("Madam")
+if(word):
+    print("palindrome")
+else:
+    print("not palindrome")'''
+
+
+'''
+Given the participants' score sheet for your University Sports Day, 
+you are required to find the runner-up score. 
+You are given scores. Store them in a list and find the score of the runner-up.
+
+Sample Input 
+5
+2 3 6 6 5
+
+Sample Output 
+5
+
+'''
+
+n=int(input())
+scores=map(int,input().split())
+print(sorted(list(set(scores)))[-2])
+
+
+'''
+Mubashir needs to assemble a parcel of ordered chocolates. He got two types of chocolates:
+•	Small chocolates (2 grams each)
+•	Big chocolates (5 grams each)
+Create a function that takes three parameters: Number of small available chocolates n_small, 
+number of big chocolates available n_big and desired weight (in grams) of the final parcel order.
+The function should return the required number of small chocolates to achieve the goal. 
+The function should return -1 if the goal cannot be achieved by any possible combinations of small and big chocolates.
+
+Examples
+chocolates_parcel(4, 1, 13) ➞ 4
+# 4 small chocolates = 8 grams
+# 1 big chocolate = 5 grams
+# 8 + 5 = 13 grams
+# Required number of small chocolates = 4
+
+chocolates_parcel(4, 1, 14) ➞ -1
+# You can not make any combination to reach 14 grams.
+
+chocolates_parcel(2, 1, 7) ➞ 1
+# 1 big chocolate = 5 grams
+# 1 small chocolates = 2 grams
+# 5 + 2 = 7 grams
+# Required number of small chocolates = 1
+Notes
+•	Maximize the use of big chocolates that are available to achieve the desired goal. 
+And only then should you proceed to use the small chocolates.
+•	You can't break chocolates into small pieces.
+
+'''
