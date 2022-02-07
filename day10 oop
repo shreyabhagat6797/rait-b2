@@ -59,6 +59,18 @@ print(chocolates_parcel(4,1,13))
 
 
 #oop
+'''
+•	A class is a user-defined blueprint or prototype from which objects are created.
+•	Class Definition Syntax:
+class ClassName:
+# Statement-1
+.
+.
+# Statement-N
+•	An Object is an instance of a Class. 
+•	self
+Class methods must have an extra first parameter in the method definition. 
+'''
 
 class Python:   #class creation
     pass 
@@ -69,12 +81,24 @@ p2=Python()
 #self
 
 #constructors or init method
+'''
+•	__init__ method is used to initializing the object’s state.
+•	Constructors are used to initializing the object’s state.
+•	Types of constructors :
+1.	default constructor 
+2.	parameterized constructor 
+'''
 
 def __init__(self):
     pass
 
 
 #destructors
+
+'''
+•	Destructors are called when an object gets destroyed. 
+'''
+
 def __del__(self):
     pass
 
