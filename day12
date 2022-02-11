@@ -1,0 +1,153 @@
+'''
+Create methods for the Calculator class that can do the following:
+•	Add two numbers.
+•	Subtract two numbers.
+•	Multiply two numbers.
+•	Divide two numbers.
+Examples
+calculator = Calculator()
+
+calculator.add(10, 5) ➞ 15
+
+calculator.subtract(10, 5) ➞ 5
+
+calculator.multiply(10, 5) ➞ 50
+
+calculator.divide(10, 5) ➞ 2
+Notes
+•	The methods should return the result of the calculation.
+
+'''
+
+class Calculator:
+    def add(self,num1,num2):
+        return num1+num2
+
+    def subtract(self,num1,num2):
+        return num1-num2
+
+    def multiply(self,num1,num2):
+        return num1*num2
+
+    def division(self,num1,num2):
+        return num1/num2
+
+c=Calculator()
+print(c.add(10,5))
+print(c.subtract(10,5))
+print(c.multiply(10,5))
+print(c.division(10,5))
+
+
+'''
+Create a Person class which will have three properties:
+•	Name
+•	List of foods they like
+•	List of foods they hate
+In this class, create the method taste():
+•	It will take in a food name as a string.
+•	Return {person_name} eats the {food_name}.
+•	If the food is in the person's like list, add 'and loves it!' to the end.
+•	If it is in the person's hate list, add 'and hates it!' to the end.
+•	If it is in neither list, simply add an exclamation mark to the end.
+Examples
+p1 = Person("Sam", ["ice cream"], ["carrots"])
+p1.taste("ice cream") ➞ "Sam eats the ice cream and loves it!"
+
+p1.taste("cheese") ➞ "Sam eats the cheese!"
+
+p1.taste("carrots") ➞ "Sam eats the carrots and hates it!"
+Notes
+•	A person can have an empty list for foods they hate and/or love.
+
+
+'''
+
+class Person:
+    def __init__(self,name,likes,hates):
+        self.name=name
+        self.likes=likes
+        self.hates=hates
+
+    def taste(self,food):
+        if food in self.likes:
+            add=" and loves it"
+        elif food in self.hates:
+            add=" and hates it"
+        else:
+            add=" "
+        return self.name+" eats the "+food+add+"!"
+
+p1=Person("Sam", ["ice cream"], ["carrots"])
+print(p1.taste("ice cream"))
+print(p1.taste("cheese"))
+print(p1.taste("carrots"))
+
+
+'''
+Create a class with a couple of functions like these examples.
+•	magic.replace("string", 'char', char') is a function that replaces all of the specified characters with another characters.
+•	magic.str_length("string") is a function that returns the length of the string.
+•	magic.trim(" string ") is a function that returns a string that truncates spaces at both the beginning and end.
+•	magic.list_slice(list, tuple) is a function that returns the items in the list that are among the specified indexes. 
+If the length of the new list is 0, return -1.
+
+Examples
+magic.replace("AzErty-QwErty", "E", "e") ➞ "Azerty-Qwerty"
+
+magic.str_length("hello world") ➞ 11
+
+magic.trim("      python is awesome      ") ➞ "python is awesome"
+
+magic.list_slice([1, 2, 3, 4, 5], (2, 4)) ➞ [ 2, 3, 4 ]
+
+'''
+
+class Magic:
+    def replace(self,string,char1,char2):
+        return string.replace(char1,char2)
+
+    def str_length(self,string):
+        return len(string)
+
+    def trim(self,string):
+        return string.strip()
+
+    def list_slice(self,lst,tupl):
+        return lst[slice(tupl[0]-1,tupl[1])]
+
+magic=Magic()
+print(magic.replace("AzErty-QwErty", "E", "e"))
+print(magic.str_length("hello world"))
+print(magic.trim("      python is awesome      "))
+print(magic.list_slice([1, 2, 3, 4, 5], (2, 4)))
+
+'''
+Create a class Smoothie and do the following:
+•	Create an instance attribute called ingredients.
+•	Create a get_cost method which calculates the total cost of the ingredients used to make the smoothie.
+•	Create a get_price method which returns the number from get_cost plus the number from get_cost multiplied by 1.5. 
+Round to two decimal places.
+•	Create a get_name method which gets the ingredients and puts them in alphabetical order into a nice descriptive sentence. 
+If there are multiple ingredients, add the word "Fusion" to the end but otherwise, add "Smoothie". Remember to change "-berries" to "-berry". 
+See the examples below.
+Ingredient	    Price
+Strawberries	$1.50
+Banana	        $0.50
+Mango	        $2.50
+Blueberries	    $1.00
+Raspberries	    $1.00
+Apple	        $1.75
+Pineapple	    $3.50
+Examples
+s2 = Smoothie(["Raspberries", "Strawberries", "Blueberries"])
+
+s2.ingredients ➞ ["Raspberries", "Strawberries", "Blueberries"]
+
+s2.get_cost() ➞ "$3.50"
+
+s2.get_price() ➞ "$8.75"
+
+s2.get_name() ➞ "Blueberry Raspberry Strawberry Fusion"
+
+'''
