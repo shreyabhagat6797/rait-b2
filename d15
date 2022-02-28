@@ -1,1 +1,106 @@
+#polymorphism
+'''same function but used in different types'''
+condidtion of occurrence in different forms refers to the use of single type entity to represent different types in different scenarios
+
+print(len("python"))
+print(len(["python","java","c"]))
+print(len({"name":"python","language":"moderate"}))
+
+
+num1=4
+num2=5
+print(num1+num2)
+
+str1="python"
+str2="language"
+print(str1+" "+str2)
+
+
+class Cat:
+    def __init__(self,name,age):
+        self.name=name
+        self.age=age
+
+    def info(self):
+        print(f"I am cat.My name is {self.name}.I am {self.age} years old")
+
+class Dog:
+    def __init__(self,name,age):
+        self.name=name
+        self.age=age
+
+    def info(self):
+        print(f"I am dog.My name is {self.name}.I am {self.age} years old")
+
+c=Cat("kitty",2)
+d=Dog("brucy",4)
+
+for animal in (c,d):
+    animal.info()
+    
+
+#encapsulation
+
+Describes the idea of  wrapping data and methods that works on data within one unit
+It puts restructions on accessing the variables & methods & can prevent accidental modification
+
+private: objct's variable can only be changed by an oject's method()
+
+protected: calling protected members of base class
+
+class Computer:
+    def __init__(self):
+        self.__maxprice=400
+
+    def sell(self):
+        print("selling price is {}".format(self.__maxprice))
+
+    def set_maxprice(self,price):
+        self.__maxprice=price
+
+c=Computer()
+c.sell()
+
+c.__maxprice=500
+c.sell()
+
+c.set_maxprice(500)
+c.sell()
+
+#abstraction
+
+It is used to hide irrelevant data/class in order to reduce the complexity and enhancement of application efficiency
+
+#from abc import abstractmethod
+ABC is Abstract Base Class.
+ABC is module name
+
+
+from abc import ABC, abstractmethod   
+class Car(ABC):   
+    @abstractmethod
+    def mileage(self):   
+        pass  
+  
+class Tesla(Car):   
+    def mileage(self):   
+        print("The mileage is 30kmph")   
+class Suzuki(Car):   
+    def mileage(self):   
+        print("The mileage is 25kmph ")   
+class Duster(Car):   
+     def mileage(self):   
+          print("The mileage is 24kmph ")   
+
+t= Tesla ()   
+t.mileage()   
+  
+r = Renault()   
+r.mileage()   
+  
+s = Suzuki()   
+s.mileage() 
+
+d = Duster()   
+d.mileage() 
 
