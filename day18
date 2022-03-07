@@ -1,0 +1,160 @@
+'''
+Freight cargo >>>>>>oops A3
+'''
+
+class Customer:
+    def __init__(self,customer_id,customer_name,address):
+        self.__customer_id=customer_id
+        self.__customer_name=customer_name
+        self.__address=address
+
+    def get_customer_id(self):
+        return self.__customer_id
+
+    def get_customer_name(self):
+        return self.__customer_name
+
+    def get_address(self):
+        return self.__address
+
+    def validate_customer_id(self):
+        id=str(self.__customer_id)
+        if(id[0]=='1' and len(id)==6):
+            return True
+        else:
+            return False
+
+class Freight:
+    counter=198
+    def __init__(self,receipent_customer,from_customer,weight,distance):
+        self.__receipent_customer=receipent_customer
+        self.__from_customer=from_customer
+        self.__weight=weight
+        self.__distance=distance
+        self.__frieght_id=0
+        self.__freight_charge=0
+
+    def validate_weight(self):
+        if self.__weight%5==0:
+            return True
+        else:
+            return False
+
+    def validate_distance(self):
+        if self.__distance>=500 and self.__distance<=5000:
+            return True
+        else:
+            return False
+
+    def forward_cargo(self):
+        if self.validate_distance() and self.validate_weight() and Customer.validate_customer_id(self.__from_customer) and Customer.validate_customer_id(self.__receipent_customer):
+            self.__frieght_id=Freight.counter+2
+            Freight.counter+=2
+            self.__freight_charge=(self.__weight*150)+(self.__distance*60)
+            return self.__frieght_id and self.__freight_charge
+        else:
+            self.__freight_charge=0
+
+    def get_receipent_customer(self):
+        return self.__receipent_customer
+
+    def get_from_customer(self):
+        return self.__from_customer
+
+    def get_weight(self):
+        return self.__weight
+
+    def get_distance(self):
+        return self.__distance
+
+    def get_freight_id(self):
+        return self.__frieght_id
+
+    def get_freight_charge(self):
+        return self.__freight_charge
+
+c1=Customer(123456,"ABC","CHennai")
+c2=Customer(112233,"XYZ","Mumbai")
+f=Freight(c1,c2,15,506)
+print(f.forward_cargo())
+print(f.get_freight_id())
+
+
+
+'''
+retail store bill >>>>>>oops A3
+'''
+
+items=[]
+class Item:
+    def __init__(self,item_id,description,price_per_quantity):
+        self.__item_id=item_id.upper()
+        self.__description=description.upper()
+        self.__price_per_quantity=price_per_quantity
+        items.append(self)
+
+    def get_item_id(self):
+        return self.__item_id
+
+    def get_description(self):
+        return self.__description
+
+    def get_price_per_quantity(self):
+        return self.__price_per_quantity
+
+class Bill:
+    counter=1000
+    def __init__(self):
+        self.__bill_id=1000
+        self.__bill_amount=0
+
+    def get_bill_id(self):
+        return self.__bill_id
+    
+    def get_bill_amount(self):
+        return self.__bill_amount
+
+    def generate_bill_amount(self,item_quantity,items):
+        if not self.__bill_amount:
+            for key,value in item_quantity.items():
+                for item in items:
+                    if item.get_item_id()==key.upper():
+                        self.__bill_amount+=value*item.get_price_per_quantity()
+                        break #you can even use continue statement
+            if self.__bill_amount>0:
+                self.__bill_id="B"+str(Bill.counter+1)
+                Bill.counter+=1
+
+class Customer:
+    def __init__(self,customer_name):
+        self.__customer_name=customer_name
+        self.__payment_status=None
+
+    def get_customer_name(self):
+        return self.__customer_name
+
+    def get_payment_status(self):
+        return self.__payment_status
+
+    def pay_bill(self,bill):
+        self.__payment_status="Paid"
+        print(self.get_customer_name())
+        print(bill.get_bill_id())
+        print(bill.get_bill_amount())
+
+item_quantity={"Ir987":3,"Ir346":2,"Ir658":4,"Ir123":2}
+
+i1=Item("Ir987","sunfeast",100.0)
+i2=Item("Ir658","maggi",151.0)
+i3=Item("Ir346","milk",35.75)
+i4=Item("Ir243","coffee",55.5)
+i5=Item("Ir123","kissan",100.0)
+i6=Item("Ir111","oats",100.0)
+
+c=Customer("Abc")
+
+
+b=Bill()
+b.generate_bill_amount(item_quantity,items)
+
+c.pay_bill(b)
