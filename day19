@@ -1,0 +1,85 @@
+#inheritance
+
+class Child:
+    def __init__(self,name):
+        self.name=name
+
+    def get_name(self):
+        return self.name
+
+    def isStudent(self):
+        return False
+
+class Student(Child):
+    def isStudent(self):
+        return True
+
+c=Child("Abc")
+print(c.get_name(),c.isStudent())
+
+c=Student("Xyz")
+print(c.get_name(),c.isStudent())
+
+
+#single inheritance
+
+class Parent:
+    def func1(self):
+        print("this is parent class")
+
+class Child(Parent):   
+    def func2(self):
+        print("this is in child class")
+
+c=Child()
+c.func1()
+c.func2()
+
+
+
+#multiple inheritance
+
+class Mother:
+    mothername=' '
+    def mother(self):
+        print(self.mothername)
+
+class Father:
+    fathername=' '
+    def father(self):
+        print(self.fathername)
+
+class Son(Mother,Father):
+    def parent(self):
+        print("father: ",self.fathername)
+        print("mother: ",self.mothername)
+
+s=Son()
+#s.fathername="Ram"
+#s.mothername="Sita"
+
+s.parent()
+
+#multilevel inheritance
+
+class Grandfather:
+    def __init__(self,grandfathername):
+        self.grandfathername=grandfathername
+   
+class Father(Grandfather):
+    def __init__(self,fathername,grandfathername):
+        self.fathername=fathername
+        Grandfather.__init__(self,grandfathername)  #invoking of constructor
+
+class Son(Father):
+    def __init__(self,sonname,fathername,grandfathername):
+        self.sonname=sonname
+        Father.__init__(self,fathername,grandfathername)        #invoking of constructor
+
+    def name(self):
+        print(self.grandfathername)
+        print(self.fathername)
+        print(self.sonname)
+
+s=Son("son","father","grandfather")
+s.name()
