@@ -1,0 +1,150 @@
+#hierarchical inheritance
+
+class Parent:
+    def func1(self):
+        print("this is in parent class")
+
+class Child1(Parent):
+    def func2(self):
+        print("this is i child 1")
+
+class Child2(Parent):
+    def func3(self):
+        print("this is in child 2")
+
+c1=Child1()
+c2=Child2() 
+
+c1.func2()
+c1.func1()
+
+c2.func3()
+c2.func1()
+
+#hybrid inheritance
+
+class School:
+    def func1(self):
+        print("this function is in school")
+
+class Student1(School):
+    def func2(self):
+        print("this is in student 1")
+
+class Student2(School):
+    def func3(self):
+        print("this is in studet2")
+
+class Student3(Student1,School):
+    def func4(self):
+        print("this is in student 3")
+
+c2=Student2()
+c2.func3()
+c2.func1()
+
+c3=Student3()
+c3.func1()
+c3.func2()
+c3.func4()
+
+
+
+#super function
+
+
+class Animals:
+    def __init__(self):
+        self.legs=4
+        self.domestic=True
+        self.tail=True
+        self.mammals=True
+
+    def isMammal(self):
+        if self.mammals:
+            print("it is a mammal")
+
+    def isDomestic(self):
+        if self.domestic:
+            print("it is domestic animal")
+
+class Dog(Animals):
+    def __init__(self):
+        super().__init__()
+
+    def isMammal(self):     
+        super().isMammal()
+
+class Cow(Animals):
+    def __init__(self):
+        super().__init__()
+
+    def hastailAndlegs(self):
+        if self.tail and self.legs==4:
+            print("has 4 legs and one tail")
+
+d=Dog()
+d.isMammal()
+d.isDomestic()
+
+c=Cow()
+c.hastailAndlegs()
+c.isDomestic()
+c.isMammal()
+
+
+#method overiding
+
+class Parent:
+    def func1(self):
+        print("this is in parent class")
+
+class Child(Parent):
+    def func1(self):
+        print("this is in child class")
+        super().func1()
+
+c=Child()
+c.func1()
+
+
+'''
+Create a class Taxi and Vehicle to get the information about that vehicle 
+Taxi – model, capacity, variant
+Vehicle – model, capacity, variant, color
+
+'''
+
+class Taxi:
+    def __init__(self,model,capacity,variant):
+        self.__model=model
+        self.__capacity=capacity
+        self.__variant=variant
+
+    def set_model(self,model):
+        self.__model=model
+    def set_capacity(self,capacity):
+        self.__capacity=capacity
+    def set_variant(self,variant):
+        self.__variant=variant
+    def get_model(self):
+        return self.__model
+    def get_capacity(self):
+        return self.__capacity
+    def get_variant(self):
+        return self.__variant
+
+class Vehicle(Taxi):
+    def __init__(self, model, capacity, variant, color):
+        super().__init__(model,capacity,variant)
+        #Taxi.__init__(self,model,capacity,variant)
+        self.__color=color
+
+    def vehicle_info(self):
+        return self.get_model()+" "+self.get_variant()+" in "+self.__color+" with "+self.get_capacity()
+
+v=Vehicle("i20","4","sx","white")
+print(v.vehicle_info())
+
+
+    
