@@ -1,0 +1,96 @@
+'''
+Coorg fruit farm oop A4
+'''
+
+class FruitInfo:
+    fruit_name_list=["Apple","Guava","Orange","Grape","SweetLime"]
+    fruit_price_list=[200,80,70,110,60]
+
+    def get_fruit_price_list():
+        return FruitInfo.fruit_price_list
+
+    def get_fruit_name_list():
+        return FruitInfo.fruit_name_list
+
+    def get_fruit_price(fruit_name):
+        if fruit_name.title() in FruitInfo.fruit_name_list:
+            return FruitInfo.fruit_price_list[FruitInfo.fruit_name_list.index(fruit_name.title())]
+
+class Purchase:
+    counter=101
+    def __init__(self,customer,fruit_name,quantity):
+        self.__purchase_id=None
+        self.__customer=customer
+        self.__fruit_name=fruit_name
+        self.__quantity=quantity
+
+    def get_purchase_id(self):
+        return self.__purchase_id
+
+    def get_customer(self):
+        return self.__customer
+
+    def get_fruit_name(self):
+        return self.__fruit_name
+
+    def get_quantity(self):
+        return self.__quantity
+
+    def calculate_price(self):
+        each_fruit_price=FruitInfo.get_fruit_price(self.__fruit_name)
+        if each_fruit_price>0:
+            self.__purchase_id='P'+str(Purchase.counter)
+            Purchase.counter+=1
+            price=each_fruit_price*self.__quantity
+            if each_fruit_price==max(FruitInfo.get_fruit_price_list()) and self.__quantity>1:
+                price*=0.98
+            if each_fruit_price==min(FruitInfo.get_fruit_price_list()) and self.__quantity>=5:
+                price*=0.95
+            if Customer.get_cust_type(self.__customer)=='Wholesale':
+                price*=0.90
+            return price
+        else:
+            return -1
+
+class Customer:
+    def __init__(self,customer_name,cust_type):
+        self.__customer_name=customer_name
+        self.__cust_type=cust_type
+
+    def get_customer_name(self):
+        return self.__customer_name
+
+    def get_cust_type(self):
+        return self.__cust_type
+
+c=Customer("ABC","Who")
+p=Purchase(c,"Apple",5)
+print(p.calculate_price())
+
+
+
+'''
+Given an integer between 0 and 26, make a variable (self.answer). That variable would be assigned to a string in this format:
+"nines:your answer, threes:your answer, ones:your answer"
+You need to find out how many ones, threes, and nines it would at least take for the number of each to add up to the given integer 
+when multiplied by one, three or nine (depends).
+
+Examples
+ones_threes_nines(10) ➞ "nines:1, threes:0, ones:1"
+
+ones_threes_nines(15) ➞ "nines:1, threes:2, ones:0"
+
+ones_threes_nines(22) ➞ "nines:2, threes:1, ones:1"
+Notes
+•	Each of the ones, threes or nines could only be either 0, 1 or 2.
+•	You must use a class.
+•	After the comma, you must put a space.
+
+'''
+
+class Ones:
+    def __init__(self,n):
+        self.answer="nines:{}, threes:{}, ones:{}".format(n//9,(n%9)//3,n%3)
+
+o=Ones(10)
+print(o.answer)
