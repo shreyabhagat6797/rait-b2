@@ -1,0 +1,285 @@
+#linked list
+
+'''
+class Node:
+    def __init__(self,data):
+        self.data=data
+        self.next=None
+
+    def set_data(self,data):
+        self.data=data
+
+    def set_next(self,next):
+        self.next=next
+
+    def get_data(self):
+        return self.data
+
+    def get_next(self):
+        return self.next
+
+class LinkedList:
+    def __init__(self):
+        self.__head=None
+        self.__tail=None
+
+    def get_head(self):
+        return self.__head
+
+    def get_tail(self):
+        return self.__tail
+
+    def add_at_end(self,data):
+        new_node=Node(data)    #create new node
+        if (self.__head is None):  #if empty
+            self.__head=self.__tail=new_node  #set new node as head and tail
+            return "Element added successfully: "+str(self.__tail.get_data())
+        else:  #if not empty
+            self.__tail.set_next(new_node)    #set tail next to new node
+            self.__tail=new_node     #set new node as tail
+            return "Element added successfully: "+str(self.__tail.get_data())
+    
+    def add_at_beginning(self,data):
+        new_node=Node(data)
+        new_node.set_next(self.__head)
+        self.__head=new_node
+        return "data inserted"
+
+    def add_in_between(self,data,data_before):
+        new_node=Node(data)
+        if data_before==None:
+            new_node.set_next(self.__head)    #set head as next to new node
+            self.__head=new_node      #make new node as head node
+            if new_node.get_next()==None:      #check if next of new node empty or not
+                self.__tail=new_node       #if empty then make that new node as tail also
+        else:   #if data before is specified
+            node_before=self.find_node(data_before)    #find the data before
+            if node_before is not None:     #if the node foound is not empty
+                new_node.set_next(node_before.get_next())     #set the next of new node 
+                node_before.set_next(new_node)    #set the next of data before
+            else: #if node before is empty
+                print(data_before," is not present in linked list")
+
+    def find_node(self,data):
+        temp=self.__head
+        while temp is not None:
+            if temp.get_data()==data:
+                return temp
+            temp=temp.get_next()
+        return None
+
+    def delete(self,data):
+        node=self.find_node(data)     #find node to be deleted
+        if node is not None:   #if node to be deleted is found and not empty
+            if node==self.__head:   #check if that node is head or not
+                if self.__head==self.__tail:   #check if that head is tail also or not
+                    self.__tail=None  #empty the tail node
+                self.__head=node.get_next() #make the next node as head node
+            else:
+                temp=self.__head
+                while temp is not None:
+                    if temp.get_next()==node:
+                        temp.set_next(node.get_next())
+                        if node==self.__tail:
+                            self.__tail=temp
+                        node.set_next(None)
+                        break
+                    temp=temp.get_next()
+            print("element deleted successfully")
+        else:
+            print(data," is not present in linked list")
+
+    def display(self):
+        temp=self.__head
+        while temp is not None:
+            print(temp.get_data())
+            temp=temp.get_next()
+
+if __name__=="__main__":
+    mylist=LinkedList()
+    while True:
+        print("Select an option:")
+        print("1. Add at end; 2.Add at the beginning; 3.Add in between; 4.find node; 5.Delete; 6.display")
+        do=int(input("enter the choice:"))
+        if do==1:
+            data=int(input("enter the element to be inserted: "))
+            result=mylist.add_at_end(data)
+            print(result)
+        elif do==2:
+            data=int(input("enter the element to be inserted: "))
+            mylist.add_at_beginning(data)
+        elif do==3:
+            data=int(input("enter the element to be inserted: "))
+            data_before=int(input("enter the element after which the new data is to be added:"))
+            result=mylist.add_in_between(data,data_before)
+            print(result)
+        elif do==4:
+            data=int(input("enter the element to be found: "))
+            result=mylist.find_node(data)
+            if result is not None:
+                print(result)
+            else:
+                print("data not found")
+        elif do==5:
+            data=int(input("enter the element to be deleted: "))
+            mylist.delete(data)
+        elif do==6:
+            mylist.display()
+        else:
+            print("wrong selection")'''
+
+'''
+Given a linked list of characters. 
+Write a python function to return a new string that is created by appending all the characters given in the linked list 
+as per the rules given below.
+
+Rules:
+
+1. Replace '*' or '/' by a single space
+
+2. In case of two consecutive occurrences of '*' or '/' , replace those two occurrences by a single space and 
+convert the next character to upper case.
+
+Assume that 
+
+1. There will not be more than two consecutive occurrences of '*' or '/'
+
+2. The linked list will always end with an alphabet
+
+Sample Input	                                                                           Expected Output
+ A,n,*,/,a,p,p,l,e,*,a,/,day,*,*,k,e,e,p,s,/,*,a,/,/,d,o,c,t,o,r,*,A,w,a,y	         An Apple a day Keeps A Doctor Away
+ 
+'''
+
+class Node:
+    def __init__(self,data):
+        self.data=data
+        self.next=None
+
+    def set_data(self,data):
+        self.data=data
+
+    def set_next(self,next):
+        self.next=next
+
+    def get_data(self):
+        return self.data
+
+    def get_next(self):
+        return self.next
+
+class LinkedList:
+    def __init__(self):
+        self.__head=None
+        self.__tail=None
+
+    def get_head(self):
+        return self.__head
+
+    def get_tail(self):
+        return self.__tail
+
+    def add_at_end(self,data):
+        new_node=Node(data)    #create new node
+        if (self.__head is None):  #if empty
+            self.__head=self.__tail=new_node  #set new node as head and tail
+            return "Element added successfully: "+str(self.__tail.get_data())
+        else:  #if not empty
+            self.__tail.set_next(new_node)    #set tail next to new node
+            self.__tail=new_node     #set new node as tail
+            return "Element added successfully: "+str(self.__tail.get_data())
+    
+    def add_at_beginning(self,data):
+        new_node=Node(data)
+        new_node.set_next(self.__head)
+        self.__head=new_node
+        return "data inserted"
+
+    def add_in_between(self,data,data_before):
+        new_node=Node(data)
+        if data_before==None:
+            new_node.set_next(self.__head)    #set head as next to new node
+            self.__head=new_node      #make new node as head node
+            if new_node.get_next()==None:      #check if next of new node empty or not
+                self.__tail=new_node       #if empty then make that new node as tail also
+        else:   #if data before is specified
+            node_before=self.find_node(data_before)    #find the data before
+            if node_before is not None:     #if the node foound is not empty
+                new_node.set_next(node_before.get_next())     #set the next of new node 
+                node_before.set_next(new_node)    #set the next of data before
+            else: #if node before is empty
+                print(data_before," is not present in linked list")
+
+    def find_node(self,data):
+        temp=self.__head
+        while temp is not None:
+            if temp.get_data()==data:
+                return temp
+            temp=temp.get_next()
+        return None
+
+    def delete(self,data):
+        node=self.find_node(data)     #find node to be deleted
+        if node is not None:   #if node to be deleted is found and not empty
+            if node==self.__head:   #check if that node is head or not
+                if self.__head==self.__tail:   #check if that head is tail also or not
+                    self.__tail=None  #empty the tail node
+                self.__head=node.get_next() #make the next node as head node
+            else:
+                temp=self.__head
+                while temp is not None:
+                    if temp.get_next()==node:
+                        temp.set_next(node.get_next())
+                        if node==self.__tail:
+                            self.__tail=temp
+                        node.set_next(None)
+                        break
+                    temp=temp.get_next()
+            print("element deleted successfully")
+        else:
+            print(data," is not present in linked list")
+
+    def display(self):
+        temp=self.__head
+        while temp is not None:
+            print(temp.get_data())
+            temp=temp.get_next()
+
+def create_new_sentence(word_list):
+    new_sentence=""
+    temp=word_list.get_head()
+    status=0
+    while(temp):
+        ch=temp.get_data()
+        if ch=='/' or ch=='*':
+            new_sentence+=" "
+            if temp.get_next().get_data()=="/" or temp.get_next().get_data()=="*":
+                status=1
+                temp=temp.get_next()
+            temp=temp.get_next()
+            continue
+        if status==1:
+            ch=ch.upper()
+            status=0
+        new_sentence+=ch
+        temp=temp.get_next()
+    return new_sentence
+
+word_list=LinkedList()
+word_list.add_at_end("A")
+word_list.add_at_end("n")
+word_list.add_at_end("*")
+word_list.add_at_end("/")
+word_list.add_at_end("a")
+word_list.add_at_end("p")
+word_list.add_at_end("p")
+word_list.add_at_end("l")
+word_list.add_at_end("e")
+word_list.add_at_end("*")
+word_list.add_at_end("d")
+word_list.add_at_end("a")
+word_list.add_at_end("y")
+result=create_new_sentence(word_list)
+print(result)
+
+
