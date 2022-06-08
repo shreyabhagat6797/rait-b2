@@ -1,0 +1,309 @@
+'''
+The Montessari Public School has planned to organize a cultural evening. The Teacher has framed a schedule based on an idea given by the students.
+Assume that the schedule is as below:
+Name	Rahul	Sheema	Gitu	Tarun	Tom
+Item	Solo Song	Dance	Plays Flute	Gymnastics	MIME
+The teacher instructed the children to be ready by holding each other’s hands while standing on the stage and they have to come forward and perform when their turn comes. It is decided that Rahul would perform at the beginning and once again in the middle of the show. After Rahul’s first performance, he would join the other children, in his new position(after Gitu). After Rahul occupies the new position, Swetha would join the children at the end for delivering the vote of thanks.
+Assume that there will always be odd number of children initially.
+Use the Child class and children_list provided to implement the class Performance as given in the below class diagram.
+1. In the constructor of Performance class, initialize children_list
+2. Display the schedule
+3. Change Rahul’s position after his performance and display the updated schedule
+4. Add Swetha and display the updated schedule
+__init__(children_list)	 Initializes the children list
+change_position(child)	 Used to change the position of the child passed as the argument to the middle position
+add_new_child(child)	 Used for adding a new child passed as the argument to the end of the schedule
+
+
+'''
+class Node:
+    def __init__(self,data):
+        self.data=data
+        self.next=None
+
+    def set_data(self,data):
+        self.data=data
+
+    def set_next(self,next):
+        self.next=next
+
+    def get_data(self):
+        return self.data
+
+    def get_next(self):
+        return self.next
+
+class LinkedList:
+    def __init__(self):
+        self.__head=None
+        self.__tail=None
+
+    def get_head(self):
+        return self.__head
+
+    def get_tail(self):
+        return self.__tail
+
+    def add_at_end(self,data):
+        new_node=Node(data)    #create new node 
+        if self.__head is None:   #if head is empty
+            self.__head=self.__tail=new_node  #set ne node as head and tail
+            return "element added successfully: "+str(self.__tail.get_data())
+        else:  #if not empty
+            self.__tail.set_next(new_node)  #set tail next to new node
+            self.__tail=new_node     #make nw node as tail node
+            return "element added successfully: "+str(self.__tail.get_data())
+    
+    def add_at_beginning(self,data):
+        new_node=Node(data)     #create new node
+        new_node.set_next(self.__head)  #set next of new node
+        self.__head=new_node   #make new node as head node
+        return "data inserted"
+
+    def add_in_between(self,data,data_before):
+        new_node=Node(data)  #make new node
+        if data_before==None:  #if node_before is not specified
+            new_node.set_next(self.__head)  #set head as next node to new node
+            self.__head=new_node   #make new node as head node
+            if new_node.get_next()==None: #check if list was empty
+                self.__tail=new_node  #make new node as tail also
+        else:   #if data_before is specified
+            node_before=self.find_node(data_before)   #find the node
+            if node_before is not None:  #if node before is found
+                new_node.set_next(node_before.get_next())   #set next of new node to the next of node before
+                node_before.set_next(new_node)   #set the next of node_before to new node
+            else:
+                print(data_before," is not present in the linked list")
+
+    def find_node(self,data):
+        temp=self.__head
+        while temp is not None:
+            if temp.get_data()==data:
+                return temp
+            temp=temp.get_next()
+        return None
+
+    def display(self):
+        temp=self.__head
+        while(temp is not None):
+            print(temp.get_data())
+            temp=temp.get_next()
+
+    def delete(self,data):
+        node=self.find_node(data)   #find node to be deleted
+        if node is not None:   #if data found is not empty
+            if node==self.__head: #if node to be deleted is head node
+                if self.__head==self.__tail:  #if head node is tail node
+                    self.__tail=None  #make tail empty
+                self.__head=node.get_next()
+            else:
+                temp=self.__head
+                while temp is not None: #travel to the element
+                    if temp.get_next()==node:    #if next element is data to be deleted
+                        temp.set_next(node.get_next())  #set before elements next to node
+                        if node==self.__tail:     #if element deleted is tail  
+                            self.__tail=temp   #set previous element as tail
+                        node.set_next(None)  #set nodes next to None
+                        break
+                    temp=temp.get_next()       #travel next element until it is found
+            print("element has been deleted successfully")
+        else:
+            print(data," is not present in linkedlist")
+
+class Child:
+    def __init__(self,name,performance):
+        self.__name=name
+        self.__performance=performance
+
+    def get_name(self):
+        return self.__name
+
+    def get_performance(self):
+        return self.__performance
+
+    def __str__(self):
+        return self.__name+' '+self.__performance
+
+class Performance:
+    def __init__(self,children_list):
+        self.__children_list=children_list
+
+    def get_children_list(self):
+        return self.__children_list
+
+    def change_position(self,child):
+        temp=self.__children_list.get_head()
+        temp1=self.__children_list.get_head()
+        while temp.get_next():
+            temp1=temp1.get_next()
+            if temp.get_next().get_next():
+                temp=temp.get_next().get_next()
+        self.__children_list.delete(child)
+        self.__children_list.add_in_between(child,temp1.get_data())
+
+    def add_new_child(self,child):
+        temp=self.__children_list.get_head()
+        while temp.get_next():
+            temp=temp.get_next()
+        self.__children_list.add_in_between(child,temp.get_data())
+
+child1=Child("Rahul","solo song")
+child2=Child("Sheema","Dance")
+child3=Child("Gitu","Plays flute")       
+child4=Child("tarun","Gymnastics")
+child5=Child("Tom","MIME")
+
+children_list=LinkedList()
+children_list.add_at_end(child1)
+children_list.add_at_end(child2)
+children_list.add_at_end(child3)
+children_list.add_at_end(child4)
+children_list.add_at_end(child5)
+
+performance=Performance(children_list)
+print("initial list of performances:")
+performance.get_children_list().display()
+
+print()
+
+print("after Rahul is added in the list after gitu:")
+performance.change_position(child1)
+performance.get_children_list().display()
+
+print()
+
+child6=Child("Swetha","vote of thanks")
+print("after swetha is added to the list:")
+performance.add_new_child(child6)
+performance.get_children_list().display()
+
+
+'''
+Write a python program to remove all duplicate elements from a sorted linked list containing integer data.
+Use the LinkedList class and methods in it to implement the above program.
+
+Example: 
+Input LinkedList: 10 10 20 20 30 30 30 40 50
+Output LinkedList: 10 20 30 40 50
+'''
+
+
+class Node:
+    def __init__(self,data):
+        self.data=data
+        self.next=None
+
+    def set_data(self,data):
+        self.data=data
+
+    def set_next(self,next):
+        self.next=next
+
+    def get_data(self):
+        return self.data
+
+    def get_next(self):
+        return self.next
+
+class LinkedList:
+    def __init__(self):
+        self.__head=None
+        self.__tail=None
+
+    def get_head(self):
+        return self.__head
+
+    def get_tail(self):
+        return self.__tail
+
+    def add_at_end(self,data):
+        new_node=Node(data)    #create new node 
+        if self.__head is None:   #if head is empty
+            self.__head=self.__tail=new_node  #set ne node as head and tail
+            return "element added successfully: "+str(self.__tail.get_data())
+        else:  #if not empty
+            self.__tail.set_next(new_node)  #set tail next to new node
+            self.__tail=new_node     #make nw node as tail node
+            return "element added successfully: "+str(self.__tail.get_data())
+    
+    def add_at_beginning(self,data):
+        new_node=Node(data)     #create new node
+        new_node.set_next(self.__head)  #set next of new node
+        self.__head=new_node   #make new node as head node
+        return "data inserted"
+
+    def add_in_between(self,data,data_before):
+        new_node=Node(data)  #make new node
+        if data_before==None:  #if node_before is not specified
+            new_node.set_next(self.__head)  #set head as next node to new node
+            self.__head=new_node   #make new node as head node
+            if new_node.get_next()==None: #check if list was empty
+                self.__tail=new_node  #make new node as tail also
+        else:   #if data_before is specified
+            node_before=self.find_node(data_before)   #find the node
+            if node_before is not None:  #if node before is found
+                new_node.set_next(node_before.get_next())   #set next of new node to the next of node before
+                node_before.set_next(new_node)   #set the next of node_before to new node
+            else:
+                print(data_before," is not present in the linked list")
+
+    def find_node(self,data):
+        temp=self.__head
+        while temp is not None:
+            if temp.get_data()==data:
+                return temp
+            temp=temp.get_next()
+        return None
+
+    def display(self):
+        temp=self.__head
+        while(temp is not None):
+            print(temp.get_data())
+            temp=temp.get_next()
+
+    def delete(self,data):
+        node=self.find_node(data)   #find node to be deleted
+        if node is not None:   #if data found is not empty
+            if node==self.__head: #if node to be deleted is head node
+                if self.__head==self.__tail:  #if head node is tail node
+                    self.__tail=None  #make tail empty
+                self.__head=node.get_next()
+            else:
+                temp=self.__head
+                while temp is not None: #travel to the element
+                    if temp.get_next()==node:    #if next element is data to be deleted
+                        temp.set_next(node.get_next())  #set before elements next to node
+                        if node==self.__tail:     #if element deleted is tail  
+                            self.__tail=temp   #set previous element as tail
+                        node.set_next(None)  #set nodes next to None
+                        break
+                    temp=temp.get_next()       #travel next element until it is found
+            print("element has been deleted successfully")
+        else:
+            print(data," is not present in linkedlist")
+
+def remove_duplicates(duplicate_list):
+    temp=duplicate_list.get_head()
+    while(temp.get_next()):
+        if temp.get_data()==temp.get_next().get_data():
+            temp1=temp
+            temp=temp.get_next()
+            print("removed:"+str(temp1.get_data()))
+            duplicate_list.delete(temp1.get_data())
+            continue
+        temp=temp.get_next()
+    duplicate_list.display()
+    return duplicate_list
+
+duplicate_list=LinkedList()
+duplicate_list.add_at_end(10)
+duplicate_list.add_at_end(10)
+duplicate_list.add_at_end(20)
+duplicate_list.add_at_end(20)
+duplicate_list.add_at_end(30)
+duplicate_list.add_at_end(30)
+duplicate_list.add_at_end(30)
+duplicate_list.add_at_end(40)
+duplicate_list.add_at_end(50)
+
+remove_duplicates(duplicate_list)
