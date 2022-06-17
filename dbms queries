@@ -1,0 +1,138 @@
+'''
+salesman
+
+salesman_id |    name    |   city   | commission          
+-------------+------------+----------+------------
+        5001 | James Hoog | New York |       0.15
+        5002 | Nail Knite | Paris    |       0.13
+        5005 | Pit Alex   | London   |       0.11
+        5006 | Mc Lyon    | Paris    |       0.14
+        5007 | Paul Adam  | Rome     |       0.13
+        5003 | Lauson Hen | San Jose |       0.12
+
+customer
+
+customer_id |   cust_name    |    city    | grade | salesman_id 
+-------------+----------------+------------+-------+-------------
+        3002 | Nick Rimando   | New York   |   100 |        5001
+        3007 | Brad Davis     | New York   |   200 |        5001
+        3005 | Graham Zusi    | California |   200 |        5002
+        3008 | Julian Green   | London     |   300 |        5002
+        3004 | Fabian Johnson | Paris      |   300 |        5006
+        3009 | Geoff Cameron  | Berlin     |   100 |        5003
+        3003 | Jozy Altidor   | Moscow     |   200 |        5007
+        3001 | Brad Guzan     | London     |       |        5005
+
+
+'''
+'''
+>>>>From the following tables write a SQL query to find the salesperson and customer who belongs to same city. 
+Return Salesman, cust_name and city.   
+
+SELECT salesman.name As "Salesman",
+customer.cust_name, customer.city
+FROM salesman,customer
+WHERE salesman.city=customer.city;
+
+
+>>>>From the following tables write a SQL query to find the salesperson(s) and the customer(s) he handle. 
+Return Customer Name, city, Salesman, commission.
+
+SELECT a.cust_name As "Customer Name",
+a.city,b.name As "Salesman",b.commision
+FROM customer a
+INNER JOIN salesman b
+ON a.salesman_id=b.salesman_id;
+
+
+>>>>From the following tables write a SQL query to find those salespersons who received a commission from the company more than 12%. 
+Return Customer Name, customer city, Salesman, commission.
+
+SELECT a.cust_name As "Customer Name",
+a.city,b.name As "Salesman",b.commision
+FROM customer a
+INNER JOIN salesman b
+ON a.salesman_id=b.salesman_id
+WHERE b.commission>0.12;
+
+>>>>From the following tables write a SQL query to display the cust_name, customer city, grade, Salesman, salesman city. 
+The result should be ordered by ascending on customer_id.
+
+SELECT a.cust_name,a.city,a.grade,
+b.name As "Salesman",b.city 
+FROM customer a
+LEFT JOIN salesman b
+ON a.saleaman_id=b.salesman_id
+ORDER BY a.customer_id;
+
+
+
+>>>>Write a SQL statement to make a list in ascending order for the salesmen 
+who works either for one or more customer or not yet join under any of the customers.
+
+SELECT a.cust_name,a.city,a.grade, 
+b.name AS "Salesman",b.city 
+FROM customer a 
+RIGHT OUTER JOIN salesman b 
+ON a.salesman_id=b.salesman_id 
+order by b.salesman_id;
+
+
+>>>>Write a SQL query to combine each row of salesman table with each row of customer table. 
+
+SELECT *
+FROM salesman a
+CROSS JOIN customer b;
+
+
+
+
+
+'''
+
+'''
+orders
+
+ord_no      purch_amt   ord_date    customer_id  salesman_id
+----------  ----------  ----------  -----------  -----------          
+70001       150.5       2012-10-05  3005         5002
+70009       270.65      2012-09-10  3001         5005
+70002       65.26       2012-10-05  3002         5001
+70004       110.5       2012-08-17  3009         5003
+70007       948.5       2012-09-10  3005         5002
+70005       2400.6      2012-07-27  3007         5001
+70008       5760        2012-09-10  3002         5001
+70010       1983.43     2012-10-10  3004         5006
+70003       2480.4      2012-10-10  3009         5003
+70012       250.45      2012-06-27  3008         5002
+70011       75.29       2012-08-17  3003         5007
+70013       3045.6      2012-04-25  3002         5001
+
+customer
+
+customer_id |   cust_name    |    city    | grade | salesman_id 
+-------------+----------------+------------+-------+-------------
+        3002 | Nick Rimando   | New York   |   100 |        5001
+        3007 | Brad Davis     | New York   |   200 |        5001
+        3005 | Graham Zusi    | California |   200 |        5002
+        3008 | Julian Green   | London     |   300 |        5002
+        3004 | Fabian Johnson | Paris      |   300 |        5006
+        3009 | Geoff Cameron  | Berlin     |   100 |        5003
+        3003 | Jozy Altidor   | Moscow     |   200 |        5007
+        3001 | Brad Guzan     | London     |       |        5005
+
+'''
+
+
+'''
+>>>>From the following tables write a SQL query to find those orders where order amount exists between 500 and 2000. 
+Return ord_no, purch_amt, cust_name, city.   
+
+SELECT a.ord_no,a.purch_amt,
+b.cust_name,b.city
+FROM  orders a,customer b
+WHERE a.customer_id=b.customer_id
+AND a.purch_amt BETWEEN 500 AND 2000;
+
+
+'''
